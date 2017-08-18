@@ -4,32 +4,51 @@
 @{
 }
 
+<div id="fullPage">
+    @if (User.Identity.IsAuthenticated)
+    {
 
-@if (User.Identity.IsAuthenticated)
-{
-
-    <div class="text-center">
-        <h4>Hello Worker @Model.FirstName @Model.LastName. You are Logged In</h4>
-        <h3>Your Current Jobs:</h3>
-        @foreach (var Job in Model.Jobs)
-        {
-            @if (Model.ActiveJobId == Job.JobId)
+        <div class="text-center">
+            <h4>Hello Worker @Model.FirstName @Model.LastName. You are Logged In</h4>
+            <h3>Your Current Jobs:</h3>
+            @foreach (var Job in Model.Jobs)
             {
-                <h5>@Job.Title | Currently Active | Mark Complete</h5>
+                <script type="text/javascript">
+                    $(function () {
+                        $('#@Job.JobId').click(function (event) {
+                            event.preventDefault();
+                            $.ajax({
+                                type: 'GET',
+                                datatype: 'html',
+                                url: '@Url.Action("MarkActive", "Workers", new {  @id = @Job.JobId, @id2 = @Model.WorkerId })',
+                                success: function (result) {
+                                    $('#fullPage').html(result);
+                                }
+                            });
+                        });
+                    })
+                </script>
+
+
+                @if (Model.ActiveJobId == Job.JobId)
+                {
+                    <h5>@Job.Title | Currently Active | Mark Complete</h5>
+                }
+                else
+                {
+                    <h5>@Job.Title | <span id="@Job.JobId">Mark Active</span> | Mark Complete</h5>
+                }
+
+            }
+            @if (Model.Avaliable)
+            {
+                <h2>Please @Html.ActionLink("select a job", "Index", "Jobs").</h2>
             }
             else
             {
-                <h5>@Job.Title | @Html.ActionLink("Mark Active", "MarkActive", "Workers", new { id = Job.JobId, id2 = Model.WorkerId }) | Mark Complete</h5>
+                <p>You are already assigned to a job.</p>
             }
+        </div>
+    }
+</div>
 
-        }
-        @if (Model.Avaliable)
-        {
-            <h2>Please @Html.ActionLink("select a job", "Index", "Jobs").</h2>
-        }
-        else
-        {
-            <p>You are already assigned to a job.</p>
-        }
-    </div>
-}
