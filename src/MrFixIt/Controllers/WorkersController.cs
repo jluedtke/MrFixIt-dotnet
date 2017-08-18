@@ -53,6 +53,23 @@ namespace MrFixIt.Controllers
             return RedirectToAction("Index");
         }
 
+        public IActionResult MarkComplete(int id, int id2)
+        {
+            Worker thisWorker = db.Workers.FirstOrDefault(w => w.WorkerId == id2);
+            thisWorker.ActiveJobId = 0;
+            thisWorker.Avaliable = true;
+            db.Entry(thisWorker).State = EntityState.Modified;
+            db.SaveChanges();
+
+            Job thisJob = db.Jobs.FirstOrDefault(j => j.JobId == id);
+            thisJob.Completed = true;
+            db.Entry(thisJob).State = EntityState.Modified;
+            db.SaveChanges();
+
+            return RedirectToAction("Index");
+        }
+
+
 
     }
 }

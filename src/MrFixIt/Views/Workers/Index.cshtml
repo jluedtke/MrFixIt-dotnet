@@ -11,6 +11,7 @@
         <div class="text-center">
             <h4>Hello Worker @Model.FirstName @Model.LastName. You are Logged In</h4>
             <h3>Your Current Jobs:</h3>
+
             @foreach (var Job in Model.Jobs)
             {
                 <script type="text/javascript">
@@ -26,17 +27,29 @@
                                 }
                             });
                         });
+                        $('.@Job.JobId').click(function (event) {
+                            event.preventDefault();
+                            $.ajax({
+                                type: 'GET',
+                                datatype: 'html',
+                                url: '@Url.Action("MarkComplete", "Workers", new {  @id = @Job.JobId, @id2 = @Model.WorkerId })',
+                                success: function (result) {
+                                    $('#fullPage').html(result);
+                                }
+                            });
+                        });
+
                     })
                 </script>
 
 
                 @if (Model.ActiveJobId == Job.JobId)
                 {
-                    <h5>@Job.Title | Currently Active | Mark Complete</h5>
+                    <h5>@Job.Title | Currently Active | <span class="@Job.JobId">Mark Complete</span></h5>
                 }
-                else
+                else if (Job.Completed == false)
                 {
-                    <h5>@Job.Title | <span id="@Job.JobId">Mark Active</span> | Mark Complete</h5>
+                    <h5>@Job.Title | <span id="@Job.JobId">Mark Active</span> | <span class="@Job.JobId">Mark Complete</span></h5>
                 }
 
             }
