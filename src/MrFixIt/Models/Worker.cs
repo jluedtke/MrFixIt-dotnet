@@ -17,6 +17,7 @@ namespace MrFixIt.Models
         public string LastName { get; set; }
         public int ActiveJobId { get; set; }
         public bool Avaliable { get; set; }
+        //This is misspelled. I am two migrations and 10 commits in. Crap.
         public string UserName { get; set; }
         //this comes from Identity.User
         public virtual ICollection<Job> Jobs { get; set; }

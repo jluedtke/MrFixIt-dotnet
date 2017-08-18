@@ -50,6 +50,7 @@
             }
             @if (Model.Avaliable)
             {
+                //Just gotta remember to always reference Available as Avaliable...
                 <h2>Please @Html.ActionLink("select a job", "Index", "Jobs").</h2>
             }
             else
