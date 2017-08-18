@@ -1,8 +1,8 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
+﻿@{
 }
+
+
+
 <div class="text-center">
     <h3>Our Current Jobs</h3>
     @Html.ActionLink("Add a new job", "Create")
@@ -16,7 +16,25 @@
         </ul>
         @if (Job.Worker == null)
         {
-        <li class="btn">This job is unclaimed. @Html.ActionLink("Claim This Job", "Claim", new { @text = @Job.Title, id = Job.JobId })</li>
+            <script type="text/javascript">
+                $(function () {
+                    $('.claimJob').click(function (event) {
+                        event.preventDefault();
+                        $.ajax({
+                            type: 'GET',
+                            datatype: 'html',
+                            url: '@Url.Action("Claim", "Jobs", new { @text = @Job.Title, id = Job.JobId })',
+                            success: function (result) {
+                                $('.returnJob').html(result);
+                            }
+                        });
+                    });
+
+                })
+            </script>
+        <li class="claimJob">This job is unclaimed.</li>
+        <div class="returnJob"></div>
+        
         }
         else
         {
@@ -24,8 +42,6 @@
 
         }
     </ul>
-
-
     <hr />
 }
 

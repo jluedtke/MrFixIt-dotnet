@@ -25,6 +25,8 @@ namespace MrFixIt.Controllers
             return View();
         }
 
+        //Refactor to tests if time allows
+
         [HttpPost]
         public IActionResult Create(Job job)
         {
