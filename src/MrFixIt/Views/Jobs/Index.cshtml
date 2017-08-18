@@ -9,6 +9,24 @@
 </div>
 @foreach (var Job in Model)
 {
+    <script type="text/javascript">
+                $(function () {
+                    $('.@Job.JobId').click(function (event) {
+                        event.preventDefault();
+                        $.ajax({
+                            type: 'GET',
+                            datatype: 'html',
+                            url: '@Url.Action("Claim", "Jobs", new { @text = @Job.Title, id = Job.JobId })',
+                            success: function (result) {
+                                $('#@Job.JobId').html(result).toggle("hide");
+                                //Kinda broken animations, but it works
+                            }
+                        });
+                    });
+
+                })
+    </script>
+
     <ul>
         <li>@Job.Title</li>
         <ul>
@@ -16,25 +34,9 @@
         </ul>
         @if (Job.Worker == null)
         {
-            <script type="text/javascript">
-                $(function () {
-                    $('.claimJob').click(function (event) {
-                        event.preventDefault();
-                        $.ajax({
-                            type: 'GET',
-                            datatype: 'html',
-                            url: '@Url.Action("Claim", "Jobs", new { @text = @Job.Title, id = Job.JobId })',
-                            success: function (result) {
-                                $('.returnJob').html(result);
-                            }
-                        });
-                    });
 
-                })
-            </script>
-        <li class="claimJob">This job is unclaimed.</li>
-        <div class="returnJob"></div>
-        
+        <li class="@Job.JobId">This job is unclaimed.</li>
+        <div id="@Job.JobId"></div>
         }
         else
         {
