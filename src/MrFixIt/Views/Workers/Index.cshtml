@@ -13,7 +13,14 @@
         <h3>Your Current Jobs:</h3>
         @foreach (var Job in Model.Jobs)
         {
-            <h5>@Job.Title</h5>
+            @if (Model.ActiveJobId == Job.JobId)
+            {
+                <h5>@Job.Title | Currently Active | Mark Complete</h5>
+            }
+            else
+            {
+                <h5>@Job.Title | @Html.ActionLink("Mark Active", "MarkActive", "Workers", new { id = Job.JobId, id2 = Model.WorkerId }) | Mark Complete</h5>
+            }
 
         }
         @if (Model.Avaliable)

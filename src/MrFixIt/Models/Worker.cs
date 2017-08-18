@@ -15,6 +15,7 @@ namespace MrFixIt.Models
         public int WorkerId { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
+        public int ActiveJobId { get; set; }
         public bool Avaliable { get; set; }
         public string UserName { get; set; }
         //this comes from Identity.User
