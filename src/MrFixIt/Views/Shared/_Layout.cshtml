@@ -41,6 +41,37 @@
                 </li>
             }
         </ul>
+        <ul class="mobile-nav flex-center">
+            <div class="hamburger"></div>
+        </ul>
+        <div class="flyout">
+            <div class="bar">
+                <header class="text-light f-col-4">
+                    <a class="navbar-brand" href="/">Mr. Fix-It</a>
+                </header>
+                <div class="close f-col-1"></div>
+            </div>
+            <ul class="flyout-menu">
+                <li>
+                    @Html.ActionLink("About", "Index", "About")
+                </li>
+                <li>
+                    @Html.ActionLink("Hire Us", "Index", "Jobs")
+                </li>
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <li>
+                        @Html.ActionLink("Worker Dashboard", "Index", "Workers")
+                    </li>
+                }
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <li>
+                        @Html.ActionLink("Log Out", "LogOff", "Account")
+                    </li>
+                }
+            </ul>
+        </div>
     </nav>
 
     <br /><br />

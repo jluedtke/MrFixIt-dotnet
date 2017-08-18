@@ -113,5 +113,5 @@ function heroSlideshow() {
 
 ////////// Add Functions to Call HERE//////////
 
-
+    mobileMenu();
 });
