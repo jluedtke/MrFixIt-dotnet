@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using MrFixIt.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
 
 // For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -15,11 +16,12 @@ namespace MrFixIt.Controllers
         private MrFixItContext db = new MrFixItContext();
 
         // GET: /<controller>/
+        [Authorize]
         public IActionResult Index()
         {
             return View(db.Jobs.Include(i => i.Worker).ToList());
         }
-
+        [Authorize]
         public IActionResult Create()
         {
             return View();
@@ -34,7 +36,7 @@ namespace MrFixIt.Controllers
             db.SaveChanges();
             return RedirectToAction("Index");
         }
-
+        [Authorize]
         public IActionResult Claim(int id)
         {
             var thisItem = db.Jobs.FirstOrDefault(items => items.JobId == id);

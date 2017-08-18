@@ -1,24 +1,43 @@
 ﻿@{
 }
 
+<script type="text/javascript">
+    $(function () {
+        $('#createJobLink').click(function (event) {
+            event.preventDefault();
+            $.ajax({
+                type: 'GET',
+                datatype: 'html',
+                url: '@Url.Action("Create", "Jobs")',
+                success: function (result) {
+                    $('#createJobView').html(result).show();
+                }
+            });
+        });
 
+    })
+</script>
 
 <div class="text-center">
     <h3>Our Current Jobs</h3>
-    @Html.ActionLink("Add a new job", "Create")
+    <span id="createJobLink">@Html.ActionLink("Add a new job", "Create")</span>
+    <div id="createJobView"></div>
 </div>
 @foreach (var Job in Model)
 {
+
+    //TODO: figure out a way to use JobId + string instead of classes and id's
     <script type="text/javascript">
                 $(function () {
-                    $('.@Job.JobId').click(function (event) {
+                    $('#@Job.JobId').click(function (event) {
                         event.preventDefault();
                         $.ajax({
                             type: 'GET',
                             datatype: 'html',
                             url: '@Url.Action("Claim", "Jobs", new { @text = @Job.Title, id = Job.JobId })',
                             success: function (result) {
-                                $('#@Job.JobId').html(result).toggle("hide");
+                                $('.toHide').html(result).hide();
+                                $('.@Job.JobId').html(result).show();
                                 //Kinda broken animations, but it works
                             }
                         });
@@ -32,13 +51,17 @@
         <ul>
             <li>@Job.Description</li>
             <li>Completed: @Job.Completed</li>
+            <li>Active: @Job.Pending</li>
+
 
         </ul>
         @if (Job.Worker == null)
         {
 
-        <li class="@Job.JobId">This job is unclaimed.</li>
-        <div id="@Job.JobId"></div>
+        <li class="clickable" id="@Job.JobId">This job is unclaimed. Click here to claim it.</li>
+        <div class="@Job.JobId toHide"></div>
+
+
         }
         else
         {

@@ -1,11 +1,39 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
+﻿@{
     ViewBag.Title = "Register";
 }
 
 @using System.Security.Claims
+
+<script type="text/javascript">
+    $(function () {
+        $('#registerLink').click(function (event) {
+            event.preventDefault();
+            $.ajax({
+                type: 'GET',
+                datatype: 'html',
+                url: '@Url.Action("Register", "Account")',
+                success: function (r) {
+                    $('#clickedView').html(r);
+                }
+            });
+        });
+
+        $('#loginLink').click(function (event) {
+            event.preventDefault();
+            $.ajax({
+                type: 'GET',
+                datatype: 'html',
+                url: '@Url.Action("Login", "Account")',
+                success: function (r) {
+                    $('#clickedView').html(r);
+                }
+            });
+        });
+
+    })
+
+</script>
+
 
 <h2>Mr. Fix-It</h2>
 <hr />
@@ -15,8 +43,9 @@
 
 } else
 {
-    <p>@Html.ActionLink("Register", "Register")</p>
-    <p>@Html.ActionLink("Log in", "Login")</p>
+    <p id="registerLink">@Html.ActionLink("Register", "Register")</p>
+    <p id="loginLink">@Html.ActionLink("Log in", "Login")</p>
+    <div id="clickedView"></div>
 }
 
 

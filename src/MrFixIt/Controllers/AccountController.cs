@@ -49,6 +49,10 @@ namespace MrFixIt.Controllers
         [HttpPost]
         public async Task<IActionResult> Register(RegisterViewModel model)
         {
+            //Not entirely sure if this is the correct way to do this.
+            if (model.Email == null || model.Password == null || model.ConfirmPassword == null)
+                return RedirectToAction("Index");
+
             var user = new ApplicationUser { UserName = model.Email };
             IdentityResult result = await _userManager.CreateAsync(user, model.Password);
             if (result.Succeeded)
@@ -69,6 +73,9 @@ namespace MrFixIt.Controllers
         [HttpPost]
         public async Task<IActionResult> Login(LoginViewModel model)
         {
+            if (model.Email == null || model.Password == null)
+                return RedirectToAction("Index");
+
             Microsoft.AspNetCore.Identity.SignInResult result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, isPersistent: true, lockoutOnFailure: false);
             if (result.Succeeded)
             {
