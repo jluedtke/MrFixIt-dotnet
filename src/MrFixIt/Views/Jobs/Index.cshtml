@@ -1,4 +1,6 @@
 ﻿@{
+    ViewData["Title"] = "Jobs";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <script type="text/javascript">
@@ -58,7 +60,7 @@
         @if (Job.Worker == null)
         {
 
-        <li class="clickable" id="@Job.JobId">This job is unclaimed. Click here to claim it.</li>
+        <li class="btn" id="@Job.JobId">This job is unclaimed. Click here to claim it.</li>
         <div class="@Job.JobId toHide"></div>
 
 

@@ -1,10 +1,6 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-
+﻿@{
+    Layout = "";
 }
-
 @model MrFixIt.Models.Job
 
     <h2>Create new Job</h2>
@@ -16,6 +12,6 @@
             @Html.TextBoxFor(model => model.Title, new { @required = "true" })
             @Html.LabelFor(model => model.Description)
             @Html.TextBoxFor(model => model.Description, new { @required = "true" })
-            <input type="submit" value="Add new job" />
+            <input type="submit" value="Add new job" class="btn-pop"/>
         }
         <p>@Html.ActionLink("Hide", "Index")</p>

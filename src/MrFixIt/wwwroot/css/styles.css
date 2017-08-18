@@ -1,8 +1,26 @@
 ﻿body {
-    padding-top: 70px;
+    padding-top: 0px;
     color: navy;
 }
 
 .clickable {
     cursor: pointer
+}
+
+.menu-items {
+    margin-bottom: 0px;
+}
+
+a , .clickable{
+    color: black;
+    text-decoration: underline;
+}
+
+li a , header a {
+    color: inherit;
+    text-decoration: inherit;
+}
+
+nav {
+    top: 0%;
 }

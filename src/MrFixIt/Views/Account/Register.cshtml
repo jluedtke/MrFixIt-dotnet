@@ -1,6 +1,8 @@
 ﻿@{
-    ViewBag.Title = "Register";
+    Layout = "";
 }
+
+@*Layout was automatically being applied, removing.*@
 
 @using MrFixIt.ViewModels
 
@@ -10,7 +12,9 @@
 <hr />
 @using (Html.BeginForm("Register", "Account", FormMethod.Post))
 {
-    @Html.LabelFor(m => m.Email)
+    //How do you add classes to these?
+
+    <div class="text-dark">@Html.LabelFor(m => m.Email)</div>
     @Html.TextBoxFor(m => m.Email)
 
     @Html.LabelFor(m => m.Password)
@@ -19,5 +23,5 @@
     @Html.LabelFor(m => m.ConfirmPassword)
     @Html.PasswordFor(m => m.ConfirmPassword)
 
-    <input type="submit" value="Register" />
-}
+    <input type="submit" value="Register" class="btn-pop" />
+    }

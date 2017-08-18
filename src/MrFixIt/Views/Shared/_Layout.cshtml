@@ -9,54 +9,47 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="~/js/scripts.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/minified-tuxedo.css" />
+    <script src="~/js/tuxedo.js"></script>
+
     <link rel="stylesheet" href="~/css/styles.css" />
+
      <title>@ViewBag.Title</title>
 </head>
 <body>
-    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="/">Mr. Fix-It</a>
-            </div>
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav">
-                    <li>
-                        @Html.ActionLink("About", "Index", "About")
-                    </li>
-                    <li>
-                        @Html.ActionLink("Hire Us", "Index", "Jobs")
-                    </li>
-                    @if (User.Identity.IsAuthenticated)
-                    {
-                        <li>
-                            @Html.ActionLink("Worker Dashboard", "Index", "Workers")
-                        </li>
-                    }
-
-                    @if (User.Identity.IsAuthenticated)
-                    {
-                        <li>
-                            @Html.ActionLink("Log Out", "LogOff", "Account")
-                        </li>
-                    }
-
-                </ul>
-            </div>
-        </div>
+    <nav class="nav-dark">
+        <header>
+            <a class="navbar-brand" href="/">Mr. Fix-It</a>
+        </header>
+        <ul class="menu-items">
+            <li class="f-col-1 flex-center">
+                @Html.ActionLink("About", "Index", "About")
+            </li>
+            <li class="f-col-1 flex-center">
+                @Html.ActionLink("Hire Us", "Index", "Jobs")
+            </li>
+            @if (User.Identity.IsAuthenticated)
+            {
+                <li class="f-col-1 flex-center">
+                    @Html.ActionLink("Worker Dashboard", "Index", "Workers")
+                </li>
+            }
+            @if (User.Identity.IsAuthenticated)
+            {
+                <li class="f-col-1 flex-center">
+                    @Html.ActionLink("Log Out", "LogOff", "Account")
+                </li>
+            }
+        </ul>
     </nav>
 
-
-
+    <br /><br />
 
     <div class="container">
         @RenderBody()
     </div>
 </body>
 @*There was jQuery here*@
+
+@*^ Indeed, good comment 6 hours ago*@
 </html>

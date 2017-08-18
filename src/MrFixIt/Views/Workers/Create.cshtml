@@ -1,7 +1,5 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
+﻿@{
+    Layout = "";
 }
 
 @using System.Security.Claims
@@ -25,7 +23,7 @@
             @Html.TextBoxFor(model => model.LastName)
 
 
-            <input type="submit" value="Register" />
+            <input type="submit" value="Register" class="btn-pop" />
         }
     }
 

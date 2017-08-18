@@ -1,16 +1,16 @@
 ﻿@{
+    Layout = "";
 }
 @model MrFixIt.Models.Job
 
-<h2>Would you like to do this job?</h2>
-<hr />
+<h2 class="form-header-dark">Would you like to do this job?</h2>
 @using (Html.BeginForm())
 {
     @Html.HiddenFor(model => model.JobId)
     @Html.HiddenFor(model => model.Title)
     @Html.HiddenFor(model => model.Description)
 
-    <h4>@Model.Title</h4>
-    <input type="submit" value="Claim This Job" />
+    <h4>Job Title : @Model.Title</h4>
+    <input type="submit" value="Claim This Job" class="btn-pop" />
 }
 <p>@Html.ActionLink("Back to list", "Index")</p>
