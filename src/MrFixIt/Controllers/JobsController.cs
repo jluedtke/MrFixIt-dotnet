@@ -32,6 +32,9 @@ namespace MrFixIt.Controllers
         [HttpPost]
         public IActionResult Create(Job job)
         {
+            if (job.Title == null || job.Description == null)
+                return RedirectToAction("Index");
+
             db.Jobs.Add(job);
             db.SaveChanges();
             return RedirectToAction("Index");

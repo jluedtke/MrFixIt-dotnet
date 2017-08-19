@@ -39,6 +39,10 @@ namespace MrFixIt.Controllers
         [HttpPost]
         public IActionResult Create(Worker worker)
         {
+            if (worker.FirstName == null || worker.LastName == null)
+                return RedirectToAction("Index");
+
+
             worker.UserName = User.Identity.Name;
             db.Workers.Add(worker); 
             db.SaveChanges();

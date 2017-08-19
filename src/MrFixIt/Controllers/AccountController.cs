@@ -49,7 +49,7 @@ namespace MrFixIt.Controllers
         [HttpPost]
         public async Task<IActionResult> Register(RegisterViewModel model)
         {
-            //Not entirely sure if this is the correct way to do this.
+            //Just in case form validation doesn't work
             if (model.Email == null || model.Password == null || model.ConfirmPassword == null)
                 return RedirectToAction("Index");
 
